@@ -2,7 +2,6 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchStudents } from "./studentsSlice"
 import StudentList from "./components/StudentList"
-import StudentForm from "./components/StudentForm"
 import { Link } from "react-router-dom"
 
 
@@ -13,6 +12,8 @@ const StudentView = () => {
     // console.log("students:: ", students)
     // console.log("status:: ", status)
     // console.log("error:: ", error)
+
+    
 
     useEffect(() => {
         dispatch(fetchStudents())
@@ -30,10 +31,10 @@ const StudentView = () => {
 
           <div>
             
-            {/* <button>Add Student</button> */}
 
             <h2>Student List</h2>
-            <StudentList students={students} />
+
+            <StudentList students={students} status={status} error={error} />
         
           </div>
         </>

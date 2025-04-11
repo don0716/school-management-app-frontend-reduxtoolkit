@@ -25,17 +25,25 @@ const StudentDetails = () => {
     return (
         <div>
 
-            <h2>Student Detail</h2>
-            <p>Name: {student?.name} </p>
-            <p>Age: {student?.age}</p>
-            <p>Grade: {student?.grade}</p>
-            <p>Gender: {student?.gender}</p>
-            <p>Attendance: {student?.attendance  } </p>
-            <p>Marks: {student?.marks}  </p>
+            <div className="row my-2">
+                <div className="col-md-6">
+                    <div className="card">
+                        <div className="card-body">
+                        <h2>Student Detail</h2>
+                        <p>Name: {student?.name} </p>
+                        <p>Age: {student?.age}</p>
+                        <p>Grade: {student?.grade}</p>
+                        <p>Gender: {student?.gender}</p>
+                        <p>Attendance: {student?.attendance  } </p>
+                        <p>Marks: {student?.marks}  </p>
 
-            <Link to={`/studentedit/${studentId}`} state={{student}}  ><button className="btn btn-warning ">Edit Details</button></Link>
+                        <Link to={`/studentedit/${studentId}`} state={{student}}  ><button className="btn btn-warning ">Edit Details</button></Link>
 
-            <button className="btn btn-danger mx-2" onClick={() => handleDelete(studentId)} >Delete</button>
+                        <button className="btn btn-danger mx-2" onClick={() => handleDelete(studentId)} >Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     )

@@ -69,6 +69,25 @@ export const studentsSlice = createSlice({
     students: [],
     status: "idle",
     error: null,
+    filter: "All",
+    sortBy: "name",
+    schoolStats: {
+      totalStudents: 0,
+      averageAttendance: 0,
+      averageMarks: 0,
+      topStudent: "-",
+    },
+  },
+  reducers: {
+    setFilter: (state, action) => {
+      state.filter = action.payload; // "All", "Boys", "Girls"
+    },
+    setSortBy: (state, action) => {
+      state.sortBy = action.payload; // "name" or "age"
+    },
+    updateSchoolStats: (state, action) => {
+      state.schoolStats = action.payload; // object of schoolStats from schoolView page.
+    },
   },
   extraReducers: (builder) => {
     // GET STUDENTS
@@ -102,6 +121,7 @@ export const studentsSlice = createSlice({
       state.status = "updating";
     });
     builder.addCase(updateStudentAsync.fulfilled, (state, action) => {
+      state.status = "updated";
       state.students = state.students.map((stud) =>
         stud._id === action.payload._id ? action.payload : stud
       );
@@ -127,5 +147,8 @@ export const studentsSlice = createSlice({
     });
   },
 });
+
+export const { setFilter, setSortBy, updateSchoolStats } =
+  studentsSlice.actions;
 
 export default studentsSlice.reducer;

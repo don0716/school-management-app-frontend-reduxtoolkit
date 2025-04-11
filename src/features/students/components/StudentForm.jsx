@@ -12,8 +12,8 @@ const StudentForm = ({isAddStudent = false}) => {
     console.log( "Student:: " ,student)
     console.log("StudentiD:: " , studentId)
 
-    const status = useSelector(state => state.students.status)
-    console.log(status)
+    const {status, error} = useSelector(state => state.students)
+    console.log("status:: " ,status)
 
     const [formData, setFormData] = useState({
         name: student?.name || "",
@@ -40,22 +40,54 @@ const StudentForm = ({isAddStudent = false}) => {
         console.log("FormData:: ", formData)
 
         if(isAddStudent ){
+
             dispatch(addStudentAsync(formData))
+            setFormData({
+                name:  "",
+                age: "", 
+                grade:  "",
+                gender: "",
+                attendance: "",
+                marks: ""
+            })
+
         } else {
             dispatch(updateStudentAsync({studentId , data: formData}))
+            setFormData({
+                name:  "",
+                age: "", 
+                grade:  "",
+                gender: "",
+                attendance: "",
+                marks: ""
+            })
         }
 
-
-
     }
+
+
 
     return (
         <>
         <div>
             <h2>Add Student</h2>
 
+            
+
            <div className="row">
             <div className="col-6">
+
+            
+                {status !== "idle" && (
+                    <div className="">
+                    <div className="">
+                        {status === "adding" ? "Adding..." : status === "success" ? "Successfully Added Student" : status === "updating" ? "Updating..." : status === "updated" ? "Successfully Updated Student Data" : "" }
+                    </div>
+                </div>
+                )}
+                {error && "There was an Error!"}
+            
+
             <form onSubmit={handleSubmit}>
                 <input className="form-control my-2" type="text" name="name" value={formData.name} onChange={onChangeHandler} placeholder="name" />
                 <input className="form-control my-2" type="text" name="age" value={formData.age} onChange={onChangeHandler} placeholder="age" />
