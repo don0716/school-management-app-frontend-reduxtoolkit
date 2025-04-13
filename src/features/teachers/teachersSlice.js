@@ -82,8 +82,15 @@ export const teachersSlice = createSlice({
     teachers: [],
     status: "idle",
     error: null,
+    schoolTeacherStats: {
+      totalTeachers: 0,
+    },
   },
-  reducers: {},
+  reducers: {
+    updateSchoolTeacherStats: (state, action) => {
+      state.schoolTeacherStats.totalTeachers = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     // fetchTeachers GET Teachers
     builder.addCase(fetchTeachers.pending, (state) => {
@@ -138,5 +145,7 @@ export const teachersSlice = createSlice({
     });
   },
 });
+
+export const { updateSchoolTeacherStats } = teachersSlice.actions;
 
 export default teachersSlice.reducer;

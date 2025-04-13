@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchStudents } from "../studentsSlice"
 import { updateSchoolStats } from "../studentsSlice"
+import { fetchTeachers, updateSchoolTeacherStats } from "../../teachers/teachersSlice"
 
 const SchoolView = () => {
     const dispatch = useDispatch()
@@ -9,9 +10,15 @@ const SchoolView = () => {
     const {students, schoolStats, status, error} = useSelector(state => state.students)
     console.log("School Stats::", schoolStats)
     console.log(status, "error::", error)
+    const {teachers, schoolTeacherStats} = useSelector(state => state.teachers)
+    console.log("stats:: ", schoolTeacherStats)
 
     useEffect(()=> {
         dispatch(fetchStudents())
+        
+    }, [])
+    useEffect(() => {
+        dispatch(fetchTeachers())
     }, [])
 
     useEffect(() => {
@@ -37,6 +44,11 @@ const SchoolView = () => {
             // console.log("Top Student::", topPerformingStudent)
 
         }
+        if(teachers.length > 0){
+            const totalTeachers = teachers.length
+            dispatch(updateSchoolTeacherStats(totalTeachers))
+        }
+
     }, [students])
    
 
@@ -54,6 +66,7 @@ const SchoolView = () => {
                         <p><strong>Average Attendance:</strong> {schoolStats.averageAttendance}  </p>
                         <p><strong>Average Marks:</strong> {schoolStats.averageMarks}  </p>
                         <p><strong>Top Student:</strong> {schoolStats.topStudent} </p>
+                        <p><strong>Total Teachers: </strong>{schoolTeacherStats.totalTeachers}</p>
                     </div>
 
                     </div>
