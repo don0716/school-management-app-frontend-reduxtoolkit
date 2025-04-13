@@ -56,7 +56,7 @@ const ClassView = () => {
                     status !== "loading" ? (
                         sortedArray.map(stud => (
                             <li key={stud._id} className="list-group-item ">
-                                {stud.name} | {stud.age} | {stud.gender}
+                                {stud.name} | {stud.age} | {stud.gender} | {stud.attendance}
                             </li>
                         ))
                     ) : (

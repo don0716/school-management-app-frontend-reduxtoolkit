@@ -48,6 +48,7 @@ export const deleteStudentAsync = createAsyncThunk(
   "students/deleteStudent",
   async (studentId) => {
     try {
+      console.log(studentId, "StudentId in thunk");
       const res = await axios.delete(
         `https://school-management-app-backend-three.vercel.app/students/${studentId}`
       );
@@ -136,7 +137,7 @@ export const studentsSlice = createSlice({
       state.status = "deleting";
     });
     builder.addCase(deleteStudentAsync.fulfilled, (state, action) => {
-      state.status = "success";
+      state.status = "deleted";
       state.students = state.students.filter(
         (student) => student._id !== action.payload
       );

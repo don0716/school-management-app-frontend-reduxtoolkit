@@ -10,7 +10,7 @@ const StudentList = ({students, error, status}) => {
                 status === "loading" ? "Loading..." : (
                     students.map((student) => (
                         <li className="list-group-item" key={student._id}>
-                            <Link to={`/studentdetail/${student._id}`} >{student.name} (Age: {student.age} )</Link>
+                            <Link to={`/studentdetails/${student._id}`} >{student.name} (Age: {student.age} )</Link>
                         </li>
                     ) )
                 )
